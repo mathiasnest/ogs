@@ -12,6 +12,7 @@
 #include <cassert>
 
 #include "MaterialLib/SolidModels/CreateEhlers.h"
+#include "MaterialLib/SolidModels/CreateMinkley.h"
 #include "MaterialLib/SolidModels/CreateLinearElasticIsotropic.h"
 #include "MaterialLib/SolidModels/CreateLubby2.h"
 #include "ProcessLib/Utils/ParseSecondaryVariables.h"
@@ -94,6 +95,11 @@ std::unique_ptr<Process> createThermoMechanicsProcess(
     if (type == "Ehlers")
     {
         material = MaterialLib::Solids::Ehlers::createEhlers<DisplacementDim>(
+            parameters, constitutive_relation_config);
+    }
+    if (type == "Minkley")
+    {
+        material = MaterialLib::Solids::Minkley::createMinkley<DisplacementDim>(
             parameters, constitutive_relation_config);
     }
     else if (type == "LinearElasticIsotropic")

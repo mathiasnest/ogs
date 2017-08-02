@@ -14,6 +14,7 @@
 #include "MaterialLib/SolidModels/CreateLinearElasticIsotropic.h"
 #include "MaterialLib/SolidModels/CreateLubby2.h"
 #include "MaterialLib/SolidModels/CreateEhlers.h"
+#include "MaterialLib/SolidModels/CreateMinkley.h"
 #include "ProcessLib/Utils/ParseSecondaryVariables.h"
 
 #include "SmallDeformationProcess.h"
@@ -77,6 +78,11 @@ createSmallDeformationProcess(
     if (type == "Ehlers")
     {
         material = MaterialLib::Solids::Ehlers::createEhlers<DisplacementDim>(
+            parameters, constitutive_relation_config);
+    }
+    if (type == "Minkley")
+    {
+        material = MaterialLib::Solids::Minkley::createMinkley<DisplacementDim>(
             parameters, constitutive_relation_config);
     }
     else if (type == "LinearElasticIsotropic")
